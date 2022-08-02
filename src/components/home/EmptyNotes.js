@@ -6,7 +6,7 @@ export default function EmptyNotes() {
   return (
     <View style={styles.container}>
       <EmptyNote width={60} height={60} style={{opacity: .8}}/>
-      <Text style={styles.text}>No notes here yer</Text>
+      <Text style={styles.text}>No notes here yet</Text>
     </View>
   )
 }
