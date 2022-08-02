@@ -1,16 +1,36 @@
 import {Pressable, StyleSheet, ScrollView, Text} from 'react-native';
-import React from 'react';
+import React, {useEffect} from 'react';
 import EmptyNotes from '../components/home/EmptyNotes';
+import ListNotes from '../components/home/ListNotes'
 import PlusIcon from '../assets/icons/plus-svgrepo-com.svg';
+import { useDispatch, useSelector } from 'react-redux';
+import { useIsFocused } from '@react-navigation/native';
 
 export default function Home({navigation}) {
+
+  const notes = useSelector((state)=>state.notes.notes)
+  const isFocused = useIsFocused();
+
+  useEffect(()=>{
+    if(isFocused){
+      console.log(notes)
+    }
+  })
+
   const addNotes = () => {
     navigation.navigate('Notes')
   };
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <EmptyNotes />
+
+      {
+        notes.length===0 ?
+        <EmptyNotes />
+        :
+        <ListNotes data={notes}/>
+      }
+
       <Pressable
         onPress={addNotes}
         style={({pressed}) => [
@@ -40,6 +60,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 50,
-    transition: "10s"
   },
 });
