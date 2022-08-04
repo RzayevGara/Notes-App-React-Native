@@ -10,11 +10,14 @@ import React, {useRef, useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {setNotes} from '../redux/reducer/NotesReducer';
 
-export default function Notes() {
+export default function Notes({route}) {
+  const data = route.params? route.params.selectedData : null
+
   const inputRef = useRef();
   const dispatch = useDispatch();
   const [keyboardStatus, setKeyboardStatus] = useState(null);
-  const [text, setText] = useState('');
+  const [text, setText] = useState(data?data.notes:"");
+  const [savedData, setSavedData] = useState(null)
   const notes = useSelector(state => state.notes.notes);
   useEffect(()=>{
     console.log(notes)
@@ -54,11 +57,12 @@ export default function Notes() {
       return curr_time;
     }
       const obj = {
-        id: Date.now(),
+        id: data?data.id:savedData?savedData.id:Date.now(),
         notes: text,
         date: getCurrentTime()
       }
       console.log(obj)
+      setSavedData(obj)
       dispatch(setNotes(obj))
   }
 
@@ -71,6 +75,7 @@ export default function Notes() {
           multiline
           autoFocus
           placeholder="Start typing"
+          value={text}
         />
         <Pressable
           onPress={saveNotes}

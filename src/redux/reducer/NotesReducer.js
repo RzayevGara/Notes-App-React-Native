@@ -10,18 +10,18 @@ export const NotesReducer = createSlice({
     reducers: {
         setNotes: (state, action)=>{
             let check = state.notes.find((item)=>{
-                // if(action.payload.id===item.id){
-                //     return {...obj, notes: action.payload}
-                // }
                 return action.payload.id===item.id
             })
             if(check){
-                let newObj = state.notes.map((item)=>{
+                let editObj = state.notes.map((item)=>{
                     if(action.payload.id===item.id){
-                        return {...state.notes, notes: action.payload}
+                        console.log("tapdi")
+                        return {...action.payload}
+                    }else{
+                        return item
                     }
                 })
-                state.notes = newObj
+                state.notes = editObj
             }
             else{
 
