@@ -21,8 +21,8 @@ export default function ListNotes(props) {
       data.map((item) => (
         <Pressable style={styles.pressBox} key={item.id} onPress={()=>openNote(item.id)}>
           <View style={styles.noteBox}>
-            <Text numberOfLines={4}>{item.notes}</Text>
-            <Text>{item.date}</Text>
+            <Text numberOfLines={4} style={styles.boxText}>{item.notes}</Text>
+            <Text style={styles.boxText}>{item.date}</Text>
           </View>
         </Pressable>
       ))}
@@ -40,15 +40,17 @@ const styles = StyleSheet.create({
   },
   pressBox: {
     width: '47%',
-    borderStyle: 'solid',
-    borderWidth: 1,
     marginTop: 20,
     borderRadius: 15,
-    padding: 16
+    padding: 16,
+    backgroundColor: "#242424"
   },
   noteBox: {
     height: 100,
     display: 'flex',
     justifyContent: 'space-between',
   },
+  boxText: {
+    color: "white"
+  }
 });

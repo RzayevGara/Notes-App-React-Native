@@ -45,6 +45,9 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingLeft: 15,
     paddingRight: 15,
+    backgroundColor: "#000000",
+    borderTopColor: '#fff',
+    borderTopWidth: 1
   },
   addButton: {
     position: 'absolute',
